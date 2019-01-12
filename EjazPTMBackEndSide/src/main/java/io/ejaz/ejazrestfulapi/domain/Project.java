@@ -36,11 +36,11 @@ public class Project {
     private Date objectUpdatedAt;
 
     public Project() {
+        this.objectCreatedAt = new Date();
     }
 
     @PrePersist
     protected void onCreate(){
-        this.objectCreatedAt = new Date();
     }
 
     @PreUpdate
@@ -69,7 +69,7 @@ public class Project {
     }
 
     public void setProjectIdentifier(String projectIdentifier) {
-        this.projectIdentifier = projectIdentifier;
+        this.projectIdentifier = projectIdentifier.toUpperCase();
     }
 
     public String getProjectDescription() {
