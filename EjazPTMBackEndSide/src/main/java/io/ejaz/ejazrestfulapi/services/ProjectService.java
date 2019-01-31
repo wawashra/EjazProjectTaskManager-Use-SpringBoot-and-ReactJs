@@ -41,4 +41,15 @@ public class ProjectService {
     public Iterable<Project> findAllProject(){
         return projectRepository.findAll();
     }
+
+    /*
+     * This method to remove Project forum DataBase by projectIdentifier Attribute .
+     */
+    public void deleteProjectByIdentifier(String projectIdentifier){
+        Project toRemove = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+        if(toRemove == null)
+            throw new ProjectIdentifireException("The Project Identifire ' " + projectIdentifier + " ' dose not exists ! ");
+
+        projectRepository.delete(toRemove);
+    }
 }
