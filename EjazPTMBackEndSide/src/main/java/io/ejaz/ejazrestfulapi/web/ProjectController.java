@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -25,11 +22,22 @@ public class ProjectController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
+
     @PostMapping("")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project , BindingResult result){
         ResponseEntity<?> mapError = mapValidationErrorService.MapValidationService(result);
         if(mapError != null )
             return mapError;
         return new ResponseEntity<Project>(projectService.saveOrUpdateProject(project), HttpStatus.CREATED);
+    }
+
+    /*
+     * This WebService use findProjectByIdentifier Service to
+     * return Project forum DataBase by projectIdentifier Attribute .
+     */
+    @GetMapping("/{projectIdentifier}")
+    public ResponseEntity<?> findProjectsByProjectIdentifier(@PathVariable String projectIdentifier){
+        Project toReturn = projectService.findProjectByIdentifier(projectIdentifier);
+        return new ResponseEntity<Project>(toReturn,HttpStatus.OK);
     }
 }

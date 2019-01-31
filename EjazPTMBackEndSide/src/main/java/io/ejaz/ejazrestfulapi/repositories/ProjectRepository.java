@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project,Long> {
-    @Override
-    Iterable<Project> findAllById(Iterable<Long> longs);
+    /*
+     * to return Project forum DataBase by projectIdentifier Attribute .
+     */
+    Project findByProjectIdentifier(String projectIdentifier);
+
 }
