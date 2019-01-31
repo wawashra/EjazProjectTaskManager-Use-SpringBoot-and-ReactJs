@@ -12,7 +12,7 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     /*
-     * This method to save || update project to DataBase
+     * This method to save || update project forum DataBase .
      */
     public Project saveOrUpdateProject(Project project){
         try{
@@ -33,5 +33,12 @@ public class ProjectService {
 
         return toReturn;
 
+    }
+
+    /*
+     * This Method to return All project forum DataBase .
+     */
+    public Iterable<Project> findAllProject(){
+        return projectRepository.findAll();
     }
 }

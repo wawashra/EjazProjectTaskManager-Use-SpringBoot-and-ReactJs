@@ -40,4 +40,12 @@ public class ProjectController {
         Project toReturn = projectService.findProjectByIdentifier(projectIdentifier);
         return new ResponseEntity<Project>(toReturn,HttpStatus.OK);
     }
+
+    /*
+     * This WebService use findAllProject Method To return all Project forum DataBase
+     */
+    @GetMapping("/all")
+    public Iterable<Project> findAllProject(){
+        return projectService.findAllProject();
+    }
 }
